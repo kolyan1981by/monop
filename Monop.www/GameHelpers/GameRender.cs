@@ -10,7 +10,6 @@ using GameLogic;
 using System.Xml.Linq;
 
 
-
 namespace Monop.www.Helpers
 {
     public class GameRender
