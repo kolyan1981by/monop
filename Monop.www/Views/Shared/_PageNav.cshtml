@@ -1,0 +1,19 @@
+﻿@model IEnumerable<MyForum.Data.PTUrl>
+<table class="sort_options" style="font-weight: bold;">
+    <tbody>
+        <tr>
+            <td align="left">
+                @foreach (var item in Model)
+                {
+                    if (!string.IsNullOrEmpty(item.Url))
+                    {
+                    <a href="@item.Url"><b>@item.Name</b></a><b>,</b>
+                    }
+                    else { 
+                        <b>[@item.Name]</b>
+                    }
+                }
+            </td>
+        </tr>
+    </tbody>
+</table>

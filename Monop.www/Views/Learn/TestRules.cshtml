@@ -1,0 +1,54 @@
+﻿@{
+    ViewBag.Title = "Auc";
+}
+@model List<GameLogic.AucRule> 
+  
+@Html.Partial("_TopNav")
+
+<div style="margin-bottom: 15px;">
+    add new
+    @using (Html.BeginForm("TestRules", "Learn"))
+    { 
+        <table style="width: 60%;">
+            <tr>
+                <td>groupId</td>
+                <td>
+                    @Html.RadioButton("gr_id", 1, true) 1
+                    @Html.RadioButton("gr_id", 2) 2
+                    @Html.RadioButton("gr_id", 3) 3
+                    @Html.RadioButton("gr_id", 4) 4
+                    @Html.RadioButton("gr_id", 5) 5
+                    @Html.RadioButton("gr_id", 6) 6
+                    @Html.RadioButton("gr_id", 7) 7
+                    @Html.RadioButton("gr_id", 8) 8
+                    @*<input name="gr_id" type="text" value="1" />*@</td>
+            </tr>
+            <tr>
+                <td>my_count</td>
+                <td>
+                    @Html.RadioButton("myc", 0, true) 0
+                    @Html.RadioButton("myc", 1) 1
+                    @Html.RadioButton("myc", 2) 2
+                    @*<input name="myc" type="text" value="0" />*@</td>
+            </tr>
+            <tr>
+                <td>an count</td>
+                <td>
+                    @Html.RadioButton("ac", 0, true) 0
+                    @Html.RadioButton("ac", 1) 1
+                    @Html.RadioButton("ac", 2) 2
+                    @*<input name="ac" type="text" value="0" />*@</td>
+            </tr>
+            <tr>
+                <td>need build</td>
+                <td>
+                    <input name="nb" type="text" value="1,2,3" /></td>
+            </tr>
+            
+        </table>
+        <input id="Submit1" type="submit" value="Test" />
+    }
+</div>
+  @ViewBag.Result
+
+@Html.Partial("_ListRules",Model)

@@ -1,0 +1,29 @@
+﻿
+<div id="smilesBox" style="display: none; cursor: default; border: 1px solid blue;">
+    <img src="/Content/images/smiles/01.gif" alt="01" onclick="insSmile('01');" />
+    <img src="/Content/images/smiles/02.gif" alt="02" onclick="insSmile('02');" />
+    <img src="/Content/images/smiles/11a.gif" alt="11a" onclick="insSmile('11a');" />
+    <img src="/Content/images/smiles/03a.gif" alt="03a" onclick="insSmile('03a');" />
+    <img src="/Content/images/smiles/04b.gif" alt="04b" onclick="insSmile('04b');" />
+    <img src="/Content/images/smiles/06a.gif" alt="06a" onclick="insSmile('06a');" />
+    <img src="/Content/images/smiles/07a.gif" alt="07a" onclick="insSmile('07a');" />
+    <img src="/Content/images/smiles/08a.gif" alt="08a" onclick="insSmile('08a');" />
+    <img src="/Content/images/smiles/09a.gif" alt="09a" onclick="insSmile('09a');" />
+    <img src="/Content/images/smiles/10a.gif" alt="10a" onclick="insSmile('10a');" />
+    <br/>
+    <img src="/Content/images/smiles/13a.gif" onclick="insSmile('13a');"/>
+    <img src="/Content/images/smiles/47a.gif" onclick="insSmile('47a');"/>
+    <img src="/Content/images/smiles/14a.gif" onclick="insSmile('14a');"/>
+    <img src="/Content/images/smiles/26a.gif" onclick="insSmile('26a');"/>
+    <img src="/Content/images/smiles/27a.gif" onclick="insSmile('27a');"/>
+    <img src="/Content/images/smiles/28a.gif" onclick="insSmile('28a');"/>
+    <img src="/Content/images/smiles/41b.gif" onclick="insSmile('41a');"/>
+    <img src="/Content/images/smiles/44a.gif" onclick="insSmile('44a');"/>
+    <img src="/Content/images/smiles/45a.gif" onclick="insSmile('45a');"/>
+    <img src="/Content/images/smiles/46a.gif" onclick="insSmile('46a');"/>
+</div>
+<script type="text/javascript">
+    function insSmile(code) {
+        $('#chatMessage').val($('#chatMessage').val() + ' ' + code + ' ');
+    }
+</script>

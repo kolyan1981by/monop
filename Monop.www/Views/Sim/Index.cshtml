@@ -1,0 +1,165 @@
+﻿@{
+    ViewBag.Title = "Simulator v2";
+}
+@{
+    var max = ViewBag.MaxRound;
+    var tickInterval = max / 50 + 1;
+
+    string[] arr = new string[4];
+    var list = (List<int[]>)ViewBag.ChartData;
+    var num = 2;
+    
+    if (list != null)
+    {
+        //int i=0;
+        //var d = list.Select(x => string.Format("[{0},{1}],", i++, x[0]));
+        num = list.First().Count();
+        
+        for (int i = 0; i < list.Count; i++)
+        {
+            for (int j = 0; j < num; j++)
+            {
+                arr[j] += string.Format("[{0},{1}],", i, list[i][j]);
+            }
+            
+        }
+    }
+
+    var chartData = "";
+    for (int i = 0; i < num; i++)
+    {
+        chartData += string.Format("[{0}],", arr[i]);
+    }
+    chartData = chartData.TrimEnd(',');
+
+}
+
+@section Head
+{
+    <script src="../../Scripts/jquery.jqplot.min.js"></script>
+    <link href="../../Content/jquery.jqplot.min.css" rel="stylesheet" />
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('.next').click(function (ev) {
+                var r = parseInt($('#rid').val());
+                var max = parseInt($('#max_r').val());
+                r++;
+                if (r > max) r = max;
+                $('#rid').val(r);
+                Load(r);
+            });
+
+            $('.prev').click(function (ev) {
+                var r = parseInt($('#rid').val());
+                r--;
+                if (r < 0) r =0;
+                $('#rid').val(r);
+                Load(r);
+            });
+
+            Load(0);
+
+            $.jqplot('chart_div_table', [@Html.Raw(chartData)],
+           {
+               seriesColors: [ "red", "blue","green"],
+               title: 'game chart',
+               show: true,
+               axes:{
+                   xaxis:{
+                       label:'rounds',
+                       min: 1, 
+                       max: @(ViewBag.MaxRound), 
+                       tickInterval: @tickInterval
+                       },
+                   yaxis:{
+                       label:'money'
+                   }
+               } ,
+               series:[
+                {showMarker:false,label:'pl_0'},
+                {showMarker:false,label:'pl_1'},
+                {showMarker:false,label:'pl_2'}
+               ],
+               legend: {
+                   show: true,
+                   location: 'n'
+               }
+           });
+
+        });
+
+       function Load(r) {
+           $.post("/Sim/Round", { r: r },
+               function (data) {
+                   UpdatePage(data);
+               });
+       }
+       function UpdatePage(data) {
+
+           $.each(data.Map, function (i, item) {
+               $('#map_c' + item.id).html(item.text).css('backgroundColor', item.color);
+           });
+
+           $.each(data.Players, function (i, item) {
+               $('#map_c' + item.id).html(item.images);
+           });
+   
+           $("#plstate").html(data.PlayersState);
+           $("#log").html(data.GameLog);
+       }
+    </script>
+}
+@Html.Partial("_TopNav")
+
+<div id="chart_div_table"></div>
+
+@{
+    var recs = (List<Monop.www.Models.RoundRec>)ViewBag.Log;
+}
+<table style="width: 100%;">
+    <tr>
+        <td style="width: 50%; vertical-align: top;">
+            <input id="max_r" type="hidden" value="@ViewBag.MaxRound" />
+            <button onclick="location.href='sim?act=sim'">
+                Simulate</button>
+            <div>
+                @if (recs != null)
+                {
+                    foreach (var gr in recs.GroupBy(x => x.round / 10))
+                    {
+                    <div style="margin-bottom: 10px; margin-left: 10px;">
+                        <span onclick="$('#r@(gr.Key)').toggle();" >rounds(@(gr.Key * 10))</span>
+                        <div id="r@(gr.Key)" style="display: none; cursor: default; border: 1px solid blue;">
+                            @foreach (var item in gr)
+                            {
+                                @Html.Raw(item.text)
+                                <br />
+                            }
+
+                        </div>
+                    </div>
+                    }
+                }
+
+            </div>
+        </td>
+        <td style="vertical-align: top;">
+
+            <div>
+                <input id="Button1" class="prev" type="button" value="prev" />
+                <input id="rid" type="text" value="0" />
+                <input id="Button2" class="next" type="button" value="next" />
+
+            </div>
+            <div style="margin-bottom: 15px;">
+                <div id="plstate"></div>
+                <div id="log"></div>
+            </div>
+            @Html.Partial("_GameMap")
+
+        </td>
+    </tr>
+
+</table>

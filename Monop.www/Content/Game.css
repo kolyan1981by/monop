@@ -1,0 +1,106 @@
+﻿table.Map
+{
+    border: solid 3px #e8eef4;
+    background-repeat: no-repeat;
+}
+
+table pcells
+{
+    padding: 0px;
+    border-color: Blue;
+}
+
+td.h
+{
+    width: 40px;
+    height: 60px;
+    background-repeat: no-repeat;
+    min-width: 45px;
+    max-width: 45px;
+    padding: 0px;
+}
+td.v
+{
+    width: 60px;
+    height: 40px;
+    max-width: 40px;
+    max-height: 40px;
+    background-repeat: no-repeat;
+}
+td.c
+{
+    width: 60px;
+    height: 60px;
+    min-width: 60px;
+    min-height: 60px;
+    background-repeat: no-repeat;
+    padding: 0px;
+}
+td.h40w20
+{
+    width: 10px;
+    max-width: 10px;
+    height: 40px;
+    max-height: 40px;
+    padding: 0px;
+}
+td.h10w10
+{
+    width: 10px;
+    max-width: 10px;
+    height: 10px;
+    max-height: 10px;
+    padding: 0px;
+}
+td.h1
+{
+    width: 40px;
+    height: 10px;
+    max-height: 10px;
+    padding: 0px;
+}
+td.h20w60
+{
+    width: 60px;
+    height: 10px;
+    max-height: 10px;
+    padding: 0px;
+}
+td.h60w20
+{
+    width: 10px;
+    min-width: 10px;
+    max-width: 10px;
+    height: 60px;
+    padding: 0px;
+}
+/* player label */
+
+SPAN.p0
+{
+    color: Red;
+    font-size: 110%;
+    font-weight: bold;
+}
+
+SPAN.p1
+{
+    color: Blue;
+    font-size: 110%;
+    font-weight: bold;
+}
+
+SPAN.p2
+{
+    color: Green;
+    font-size: 110%;
+    font-weight: bold;
+}
+
+SPAN.p3
+{
+    color: Yellow;
+    font-size: 110%;
+    font-weight: bold;
+}
+

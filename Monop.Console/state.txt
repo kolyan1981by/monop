@@ -1,0 +1,26 @@
+<Game Players="kolyan;comp1" CurrId="0" GameState="BeginStep" RollMode="1" TimeOut="30" Round="23">
+  <Players>
+    <Player PlayerId="0" money="430000" pos="35" isBot="false" lastRolls="25:32:21">
+      <Cells>
+        <Cell cid="5">0,0</Cell>
+        <Cell cid="6">0,0</Cell>
+        <Cell cid="12">0,0</Cell>
+        <Cell cid="13">0,0</Cell>
+        <Cell cid="26">0,0</Cell>
+        <Cell cid="27">0,0</Cell>
+        <Cell cid="32">0,0</Cell>
+        <Cell cid="35">0,0</Cell>
+      </Cells>
+    </Player>
+    <Player PlayerId="1" money="170000" pos="21" isBot="true" lastRolls="42:42:23">
+      <Cells>
+        <Cell cid="16">0,0</Cell>
+        <Cell cid="18">0,0</Cell>
+        <Cell cid="21">0,0</Cell>
+        <Cell cid="25">0,0</Cell>
+        <Cell cid="31">0,0</Cell>
+        <Cell cid="37">0,0</Cell>
+      </Cells>
+    </Player>
+  </Players>
+</Game>

@@ -1,0 +1,74 @@
+<GameTexts>
+  <text key="BuyOrAuc">
+    <en>
+      <![CDATA[
+      <img onclick="action();" 
+      onmouseout="this.src='/Content/images/Game/BuyEn.png';" 
+      onmouseover="this.src='/Content/images/Game/BuyEn_h.png';"  
+      src="/Content/images/Game/BuyEn.png" id="ibBuy">
+        <img onclick="action('auc');" 
+        src="/Content/images/Game/AucEn.png" id="ibAuc" 
+        onmouseout="this.src='/Content/images/Game/AucEn.png';" 
+        onmouseover="this.src='/Content/images/Game/AucEn_h.png';">
+    ]]>
+    </en>
+    <ru></ru>
+  </text>
+  <text key="ButtonOK">
+    <en>
+      <![CDATA[
+      <input id="ButtonGameOK" type="button" value="ok" onclick="action('ok');" />
+    ]]>
+    </en>
+    <ru></ru>
+  </text>
+  <text key="ButtonPay">
+    <en>
+      <![CDATA[
+          <img id="ibPay" onclick="action();" 
+          src="/Content/images/Game/PayEn.png"  
+          onmouseout="this.src='/Content/images/Game/PayEn.png';" 
+          onmouseover="this.src='/Content/images/Game/PayEn_h.png';" >
+    ]]>
+    </en>
+    <ru></ru>
+  </text>
+  <text key="ButtonPoliceUseKey">
+    <en>
+      <![CDATA[
+         <input id="ButtonPolKey" type="button" value="Key" onclick="action('policekey');" />
+    ]]>
+    </en>
+    <ru></ru>
+  </text>
+  <text key="HtmlAuction">
+    <en>
+      <![CDATA[
+             Auction for({3}) ({4})<br />
+<table>
+<tr><td>start bid  </td> <td>{0} </td></tr>
+<tr><td>current bid  </td> <td>{1} </td></tr>
+<tr><td>your bid  </td> <td>{2} </td> </tr> 
+<tr><td><input id="btnAucY" type="button" value="yes" onclick="action('auc_y');" />
+<input id="btnAucNo" type="button" value="no" onclick="action('auc_no');" /></td> </tr></table>
+    ]]>
+    </en>
+    <ru></ru>
+  </text>
+  <text key="ButtonRandomMove">
+    <en>
+      <![CDATA[
+      <input id="ButtonRMove" type="button" value="move" onclick="action('move');" />
+    ]]>
+    </en>
+    <ru></ru>
+  </text>
+  <text key="ButtonRoll">
+    <en>
+      <![CDATA[
+        <input id="Button3" type="button" value="Roll" onclick="roll(0);" />
+    ]]>
+    </en>
+    <ru></ru>
+  </text>
+</GameTexts>

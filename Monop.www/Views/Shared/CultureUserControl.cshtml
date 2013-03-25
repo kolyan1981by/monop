@@ -1,0 +1,8 @@
+﻿@if (Session["Culture"] != null && Session["Culture"].ToString() == "ru-RU")
+{
+    <a href="/Home/SetCulture/en-US">[ En ]</a>
+}
+else
+{ 
+    <a href="/Home/SetCulture/ru-RU">[ Ru ]</a> 
+}

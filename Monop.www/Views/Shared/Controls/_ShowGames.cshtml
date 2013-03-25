@@ -1,0 +1,66 @@
+﻿@using Monop.www.Helpers
+@model List<GameLogic.Game>
+<h2>
+    @Html.Span("home.index.RunningGames", "Running Games:")
+</h2>
+<div id="RunningGames">
+    <table style="width: 90%;">
+        <tbody>
+            <tr>
+                @foreach (var g in Model.Where(x => x.RunningGame))
+                {
+                    
+                
+                    <td>
+                        @Html.Raw(string.Join(" <br /> ", g.Players.Select(x => string.Format("{0}[{1}]", x.htmlName, x.Status)).ToArray()))
+                        <br />
+                        @Html.Raw(g.IsFinished ? "finished, winner:" + g.Winner.htmlName : "running"), 
+                    </td>
+                    <td>
+                        <a href="/Game/View/@g.Id">view</a>
+                    </td>
+                    if (Request.IsAuthenticated && (g.IsGameCreator(User.Identity.Name) || ConfigHelper.IsAdmin(User.Identity.Name)))
+                    {
+                    <td>
+                        <a href="/Home/Delete/@g.Id">del</a>
+                    </td>
+                    }
+                }
+            </tr>
+        </tbody>
+    </table>
+</div>
+<br />
+<h2>
+    @Html.Span("home.index.PendingGames", "Pending Games:")
+</h2>
+<br />
+<div id="PendingGames">
+    <table style="width: 90%;">
+        <tbody>
+            <tr id="">
+                @foreach (var g in Model.Where(x => !x.RunningGame))
+                {
+                    <td>
+                        @Html.Raw(string.Join(" <br /> ", g.Players.Select(x => string.Format("{0}[{1}]", x.htmlName, x.Status)).ToArray()))
+                        <br>
+                        <span ondblclick="translate('home.index.MaxCount')" id="home.index.MaxCount">max players:</span> @g.conf.cnfMaxPlayers
+                    </td>
+                    <td>
+                        <a href="/Home/Join/3b47f0a4-47b4-4104-8bc0-22a5e6477165">join</a>
+                    </td>
+                    if (Request.IsAuthenticated && (g.IsGameCreator(User.Identity.Name) || ConfigHelper.IsAdmin(User.Identity.Name)))
+                    {
+                    <td>
+                        <a href="/Home/AddBot/@g.Id">add bot</a>
+                    </td>
+                    <td>
+                        <a href="/Home/Delete/@g.Id">del</a>
+                    </td>
+                    }
+                }
+            </tr>
+        </tbody>
+    </table>
+</div>
+

@@ -1,0 +1,34 @@
+﻿@model GameLogic.Game
+@using GameLogic
+
+@{ var g = Model;}
+
+@DateTime.Now
+
+<br />
+TimeOut
+@Html.Raw(g.ShowTimeOut)
+round: @g.RoundNumber
+<table style="width: 540px; height: 140px;">
+    <tr>
+        <td style="width: 50%;" valign="top">
+            @foreach (var pl in g.Players)
+            {
+                <table style="width: 100%;">
+                    <tr>
+                        <td style="width: 35%;">
+                            @Html.Raw(pl.htmlName)
+                        </td>
+                        <td>
+                            @Html.Raw(GameLogic.HTML.PrintWithColor(pl.Money))
+                            Worth @Html.Raw(GameLogic.HTML.PrintWithColor(g.GetPlayerAssets(pl.Id)))
+                        </td>
+                    </tr>
+                </table>
+            }
+        </td>
+        <td valign="top">
+            @Html.Raw(Monop.www.Helpers.GameRender.ShowGameState(g, User.Identity.Name))
+        </td>
+    </tr>
+</table>

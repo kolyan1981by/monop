@@ -1,0 +1,35 @@
+﻿@model PetaPoco.Page<Monop.Forum.User>
+@{
+    ViewBag.Title = "Users";
+}
+
+@Html.Partial("_PageNav", Monop.Forum.Helper.GeneratePageNavUrls("/Admin/Users?pg={0}", Model.CurrentPage, Model.TotalPages))
+<br />
+<table class="forumTable">
+    <tbody>
+        <tr style="height: 22px">
+            <th>[Uid]
+            </th>
+            <th>[Username]
+            </th>
+            <th>[Description]
+           
+        </tr>
+        @foreach (var ss in Model.Items)
+        {
+          
+            <tr>
+                <td>
+                    @ss.Uid
+                </td>
+                <td>
+                    @ss.Username
+                </td>
+                <td>
+                    @ss.UserDescription
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

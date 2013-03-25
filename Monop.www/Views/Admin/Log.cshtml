@@ -1,0 +1,44 @@
+﻿@model PetaPoco.Page<Monop.Forum.SiteLog>
+@{
+    ViewBag.Title = "Log";
+}
+@Html.Partial("_PageNav", Monop.Forum.Helper.GeneratePageNavUrls("/Admin/Log?pg={0}", Model.CurrentPage, Model.TotalPages))
+<br />
+<table class="forumTable">
+    <tbody>
+        <tr style="height: 22px">
+            <th>[ReqestIp]
+            </th>
+            <th>[UserAgent]
+            </th>
+            <th>[Referer]
+            </th>
+            <th>[RequestedUrl]
+            </th>
+            <th>[Date]
+            </th>
+        </tr>
+        @foreach (var ss in Model.Items)
+        {
+          
+            <tr>
+                <td>
+                    @ss.ReqestIp
+                </td>
+                <td>
+                    @ss.UserAgent
+                </td>
+                <td>
+                    @ss.Referer
+                </td>
+                <td>
+                    @ss.RequestedUrl
+                </td>
+                <td>
+                    @ss.Date
+                </td>
+            </tr>
+           
+        }
+    </tbody>
+</table>

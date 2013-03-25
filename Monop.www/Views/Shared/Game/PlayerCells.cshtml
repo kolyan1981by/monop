@@ -1,0 +1,50 @@
+﻿@model GameLogic.Game
+@using Monop.www.Helpers
+@{ 
+    var g = Model;
+}
+<table>
+    <tr>
+        <td>
+            <input name="btnMortage" type="button" value="mortgage/unmortgage" onclick="Mortgage();" />
+            <input name="btnTrade" type="button" value="trade" onclick="Trade();" />
+            <br />
+            <input name="btnBuild" type="button" value="build" onclick="Build();" />
+            <input name="btnSellHouses" type="button" value="sell houses" onclick="Sell();" />
+        </td>
+    </tr>
+</table>
+<table>
+    <tr>
+        @foreach (var pl in g.Players)
+        {
+            <td valign="top">
+                @Html.Raw(pl.htmlName) @(new String('k', pl.FreePoliceKey))
+                <table cellpadding="0">
+                    <tr>
+                        <td style="padding: 0px;">
+                            @Html.Raw(GameLogic.HTML.PrintWithColor(pl.Money))
+                        </td>
+                    </tr>
+                    @foreach (var cell in g.Map.CellsByUser(pl.Id).OrderBy(x => x.Group))
+                    {
+                    
+                        <tr>
+                            <td style="padding: 0px;">
+                                <input type='checkbox' name='@(pl.Id)_ids[]' value='@cell.Id' id='checkbox_1' />
+                                @Html.Raw(MapHelper.PrintPlayerCellText(cell))
+                            </td>
+                        </tr>
+                    }
+                    <tr>
+                        <td style="padding: 0px;">
+                            money (k$)
+                            <br />
+                            <input id="@(pl.Id)_m" size="7" type="text" style="width: 72px" />
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        }
+    </tr>
+</table>

@@ -1,0 +1,145 @@
+﻿
+@model List<GameLogic.AucRule> 
+  
+
+
+<span id="addResult"></span>
+
+<div style="margin-bottom: 20px;">
+    <button onclick="location.href='/Learn/SaveAucRules'">
+        Save Rules</button>
+
+</div>
+
+@foreach (var gr in Model.GroupBy(x => x.GroupId).OrderBy(x => x.Key))
+{                    
+    <div style="margin-bottom: 10px; margin-left: 10px;">
+        <span class="show_hide">
+            @Monop.www.GameHelpers.SimHelper.lands[gr.Key - 1]
+        </span>
+        <div class="slidingDiv">
+            <table style="width: 70%;">
+                <tbody>
+                    <tr>
+                        <th style="width: 10%;">id
+                        </th>
+                        <th style="width: 10%;">GroupId
+                        </th>
+                        <th style="width: 20%;">[Group Name]
+                        </th>
+                        <th style="width: 10%;">i have</th>
+
+                        <th style="width: 10%;">another</th>
+
+                        <th>need_build</th>
+                        <th>factor</th>
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in gr)
+                    {
+                        <tr>
+                            <td><span id="rid">@item.Id</span>
+                            </td>
+                            <td>@item.GroupId
+                            </td>
+                            <td>@Monop.www.GameHelpers.SimHelper.lands[item.GroupId - 1]
+                            </td>
+                            <td>
+                                <span id="myc" class="display-mode">@item.MyCount</span>
+                                <input class="edit-mode" id="myc1" type="text" value="@item.MyCount">
+                            </td>
+                            <td>
+                                <span id="ac" class="display-mode">@item.AnCount</span>
+                                <input class="edit-mode" id="ac1" type="text" value="@item.AnCount">
+                            </td>
+                            <td>
+                                <span id="nb" class="display-mode">@item.GroupsWithHouses</span>
+                                <input class="edit-mode" id="nb1" type="text" value="@item.GroupsWithHouses">
+                            </td>
+                            <td>
+                                <span id="fac" class="display-mode">@item.Factor</span>
+                                <input class="edit-mode" id="fac1" type="text" value="@item.Factor">
+                            </td>
+
+                            <td style="width: 60px;">
+                                <button class="edit-rec display-mode" id="@item.Id">Edit</button>
+                                <button class="save-rec edit-mode" id="@item.Id">Save</button>
+                                <button class="cancel-rec edit-mode">Cancel</button>
+                            </td>
+                            <td>
+                                <button class="del-rec display-mode" id="@item.Id">Delete</button>
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+}
+<script>
+
+    $(function () {
+        $(".slidingDiv").hide();
+        $(".show_hide").show();
+
+        $('.show_hide').toggle(
+                function () { $(this).next('div').show() },
+                function () { $(this).next('div').hide() }
+        );
+
+
+        $('.edit-mode').hide();
+
+        $('.edit-rec').on('click', function () {
+            var tr = $(this).parents('tr:first');
+            tr.find('.edit-mode, .display-mode').toggle();
+        });
+
+        $('.save-rec').on('click', function () {
+            var tr = $(this).parents('tr:first');
+
+            var rid = $(this).prop('id');
+            var myc = tr.find('#myc1').val();
+            var ac = tr.find('#ac1').val();
+            var f = tr.find('#fac1').val();
+            var nb = tr.find('#nb1').val();
+
+            $.post(
+                '/Learn/EditAuc',
+                { rid: rid, myc: myc, ac: ac, fac: f, nb: nb },
+                function (tempr) {
+                    tr.find('#myc').text(myc);
+                    tr.find('#ac').text(ac)
+                    tr.find('#fac').text(f);
+                    tr.find('#nb').text(nb);
+                });
+            tr.find('.edit-mode, .display-mode').toggle();
+
+        });
+
+        $('.cancel-rec').on('click', function () {
+            var tr = $(this).parents('tr:first');
+            tr.find('.edit-mode, .display-mode').toggle();
+        });
+
+        $('.del-rec').on('click', function () {
+            if (!confirm('Are you sure you want to delete the record?')) return;
+
+            var tr = $(this).parents('tr:first');
+
+            var rid = $(this).prop('id');
+
+            $.post(
+                '/Learn/DelAuc',
+                { rid: rid },
+                function (res) {
+                    $('#addResult').text(res);
+                });
+
+        });
+    });
+</script>

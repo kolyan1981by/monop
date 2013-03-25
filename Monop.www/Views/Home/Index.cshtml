@@ -1,0 +1,117 @@
+﻿@using Monop.www.Helpers
+@{
+    ViewBag.Title = "Home Page";
+}
+@section Head
+{
+    <script src="@Url.Content("~/Scripts/Game/Home.js")" type="text/javascript"></script>
+}
+<h2>
+    @Html.Span("home.index.Title1", "Hello, user, this is Monopoly game")
+</h2>
+<p>
+    @Html.Span("home.index.Title2", "short description")
+    <br />
+    <br />
+    <a href="http://www.youtube.com/watch?v=CXVZrPSD05U">Game preview</a>
+</p>
+<table width="100%">
+    <tr>
+        <td style="width: 60%">
+             <div id="show_games">
+            </div>
+            <br />
+            <br />
+            <h2>
+                @Html.Span("home.index.CreateGame", "Create game:")</h2>
+            @using (Html.BeginForm("NewGame", "Home"))
+            {
+                <table style="width: 90%;">
+                    <tr>
+                        <td>
+                            <label for="count">
+                                @Html.Span("home.index.PlayersCount", "Player count:")
+                            </label>
+                        </td>
+                        <td>
+                            @Html.RadioButton("Count", 2, true) 2
+                            @Html.RadioButton("Count", 3) 3
+                            @Html.RadioButton("Count", 4) 4
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="timeout">
+                                @Html.Span("home.index.Timeout", "timeout(sec):")</label>
+                        </td>
+                        <td>
+                            @Html.RadioButton("timeout", 30, true) 30
+                            @Html.RadioButton("timeout", 60) 60
+                            @Html.RadioButton("timeout", 120) 120
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="timeout">
+                                @Html.Span("home.index.RollMode", "Roll Mode:")</label>
+                        </td>
+                        <td>
+                            @Html.RadioButton("rollmode", 0) manuall
+                            @Html.RadioButton("rollmode", 1, true) random
+                        </td>
+                    </tr>
+                </table>
+                <br />
+                <input type="submit" value="Create" />
+                if (ViewBag.Admin)
+                { @Html.CheckBox("debug", false) <span>debug</span> }
+
+            }
+        </td>
+        <td valign="top">
+            <table style="width: 100%;">
+                <tr>
+                    <td>
+                        <h2>
+                            Top of players</h2>
+                        <ul>
+                            @foreach (var pl in ViewBag.TopPlayers)
+                            {
+                                   
+                                <li>
+                                    @pl </li>
+                            }
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div id="divChat">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Message:
+                        <input id="chatMessage" type="text" />
+                        <input id="btSend" type="button" value="Send" onclick="sendMessage();" />
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+@if (ViewBag.Admin)
+{
+    <h2>
+        restore game</h2>
+    using (Html.BeginForm("RestoreGame", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <text>
+        <br />
+        File1:<input type="file" name="file1" id="file1" />
+        <br />
+        <input type="submit" value="Restore" />
+        </text>
+    }
+    
+}
