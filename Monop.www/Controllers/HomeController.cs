@@ -27,7 +27,7 @@ namespace Monop.www.Controllers
             if (!Request.IsAuthenticated)
             {
                 var userName = "user" + DateTime.Now.ToString("mmss");
-                FormsAuthentication.SetAuthCookie(userName, true);
+                //FormsAuthentication.SetAuthCookie(userName, true);
             }
 
             return View();

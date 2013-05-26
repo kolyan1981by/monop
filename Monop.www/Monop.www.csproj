@@ -231,6 +231,15 @@
     <Content Include="Views\Sim\Index.cshtml" />
     <Content Include="Views\Learn\Auc.cshtml" />
     <Content Include="Views\Sim\_TopNav.cshtml" />
+    <Content Include="res\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="res\Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="res\Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
