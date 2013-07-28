@@ -12,7 +12,7 @@ namespace Monop.www.GameHelpers
     {
         public static string[] lands = new[] { "Spain", "Greece", "Italy", "England", "Russia", "France", "Usa", "Japan" };
 
-        public static string GetPlayersInfo(GameLogic.GameAction ra)
+        public static string GetPlayersInfo(GameAction ra)
         {
             string text = "";
             foreach (Player pl in ra.Players)
@@ -38,10 +38,12 @@ namespace Monop.www.GameHelpers
             return res;
         }
 
-        public static RoundRec RoundLog(int rid, List<GameLogic.GameAction> gr)
+        public static RoundRec RoundLog(int rid, List<GameAction> gr)
         {
-            string text = "";
-            text += string.Format("r{0}, {1} <br />", rid, HTML.PlName(gr.First().curr, "bot-", true));
+			if(!gr.Any())
+				return new RoundRec { round = rid, text = "no events" };
+
+			var text = string.Format("r{0}, {1} <br />", rid, HTML.PlName(gr.First().curr, "pl-", true));
 
             foreach (var act in gr)
             {
@@ -88,7 +90,7 @@ namespace Monop.www.GameHelpers
             return File.ReadAllLines(fpath).OrderBy(x => x).ToList();
         }
 
-        public static void SaveAucRules(List<GameLogic.AucRule> list)
+        public static void SaveAucRules(List<AucRule> list)
         {
             var res = new List<string>();
             res.Add("//" + DateTime.Now.ToString());

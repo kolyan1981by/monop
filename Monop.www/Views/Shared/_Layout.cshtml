@@ -7,16 +7,20 @@
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
     <meta name='keywords' content='monopoly, game, online game' />
     <meta name='description' content='monopoly -  best online game , enjoy' />
-    
-    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
-    <link href="@Url.Content("~/Content/Game.css")" rel="stylesheet" type="text/css" />
-    
-    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.min.js")"></script>
+
+    <link rel="stylesheet" href="@Url.Content("~/Content/Site.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/Game.css")" />
+
+   @* <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.min.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Scripts/jquery-ui.min.js")"></script>
-    
-    <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="@Url.Content("~/Content/jquery-ui.min.css")"/>*@
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/themes/base/minified/jquery-ui.min.css" />
+
     <script src="@Url.Content("~/Scripts/Site.js")" type="text/javascript"></script>
-    
+
     @RenderSection("Head", required: false)
 </head>
 <body>
@@ -24,8 +28,7 @@
     <div class="page">
         <div id="header">
             <div id="title">
-                <h1>
-                    Real Gold Monopoly</h1>
+                <h1>Real Gold Monopoly</h1>
             </div>
             <div id="logindisplay">
                 @Html.Partial("_LogOnPartial")
@@ -37,8 +40,9 @@
                     @Html.Raw(Html.MenuItem("Game", "Play", "Game"))
                     @Html.Raw(Html.MenuItem("Simul", "Index", "Sim"))
                     @Html.Raw(Html.MenuItem("learn", "Index", "Learn"))
+                    @Html.Raw(Html.MenuItem("test", "Index", "test"))
                     @*@Html.Raw(Html.MenuItem("Forum", "Index", "Forum"))*@
-                 
+
                 </ul>
             </div>
         </div>

@@ -75,6 +75,7 @@
     <Compile Include="BotBrainTrade.cs" />
     <Compile Include="CellInf.cs" />
     <Compile Include="BotBrainHouses.cs" />
+    <Compile Include="GameCommands.cs" />
     <Compile Include="GameHelper.cs" />
     <Compile Include="Helpers\ManualLogicHelper.cs" />
     <Compile Include="Helpers\HTML.cs" />

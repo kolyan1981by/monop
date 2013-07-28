@@ -13,13 +13,14 @@
     @Html.Span("home.index.Title2", "short description")
     <br />
     <br />
-    <a href="http://www.youtube.com/watch?v=CXVZrPSD05U">Game preview</a>
+    @*<a href="http://www.youtube.com/watch?v=CXVZrPSD05U">Game preview</a>*@
+    <a href="/test">Test</a>
 </p>
 
 <table width="100%">
     <tr>
         <td style="width: 60%">
-             <div id="show_games">
+            <div id="show_games">
             </div>
             <br />
             <br />
@@ -73,8 +74,7 @@
             <table style="width: 100%;">
                 <tr>
                     <td>
-                        <h2>
-                            Top of players</h2>
+                        <h2>Top of players</h2>
                         <ul>
                             @foreach (var pl in ViewBag.TopPlayers)
                             {
@@ -86,33 +86,43 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>
-                        <div id="divChat">
+                    <td>Message:
+                        <input id="chatMessage" type="text" />
+                        <input id="btSend" type="button" value="Send" onclick="sendMessage();" />
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        Message:
-                        <input id="chatMessage" type="text" />
-                        <input id="btSend" type="button" value="Send" onclick="sendMessage();" />
+                        <div id="divChat"></div>
                     </td>
                 </tr>
             </table>
         </td>
     </tr>
 </table>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("#chatMessage").keyup(function (event) {
+            if (event.keyCode == 13) {
+                sendMessage();
+            }
+        });
+
+    });
+</script>
+
 @if (ViewBag.Admin)
 {
-    <h2>
-        restore game</h2>
+    <h2>restore game</h2>
     using (Html.BeginForm("RestoreGame", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
-        <text>
-        <br />
-        File1:<input type="file" name="file1" id="file1" />
-        <br />
-        <input type="submit" value="Restore" />
-        </text>
+    <text>
+    <br />
+    File1:<input type="file" name="file1" id="file1" />
+    <br />
+    <input type="submit" value="Restore" />
+    </text>
     }
-    
+
 }

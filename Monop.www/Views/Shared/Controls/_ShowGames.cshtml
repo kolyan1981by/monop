@@ -47,7 +47,7 @@
                         <span ondblclick="translate('home.index.MaxCount')" id="home.index.MaxCount">max players:</span> @g.conf.cnfMaxPlayers
                     </td>
                     <td>
-                        <a href="/Home/Join/3b47f0a4-47b4-4104-8bc0-22a5e6477165">join</a>
+                        <a href="/Home/Join/@g.Id">join</a>
                     </td>
                     if (Request.IsAuthenticated && (g.IsGameCreator(User.Identity.Name) || ConfigHelper.IsAdmin(User.Identity.Name)))
                     {

@@ -18,6 +18,60 @@ namespace GameLogic
 
         #endregion
 
+		#region InitMap
+
+		public void InitMap()
+		{
+			InitLandCells();
+			InitRandomCells();
+		}
+
+		public void InitLandCells()
+		{
+			g.Cells = GameHelper.LoadLands().OrderBy(x => x.Id).ToArray();
+		}
+
+		public void InitRandomCells()
+		{
+			var CommunityChest = new List<ChestCard>();
+			var ChanceChest = new List<ChestCard>();
+
+			g.CommunityChest = CommunityChest;
+			g.ChanceChest = ChanceChest;
+
+			//pay
+
+			CommunityChest.Add(new ChestCard { RandomGroup = -1, Text = "need pay bank", Money = 100000 });
+			//get money
+			CommunityChest.Add(new ChestCard { RandomGroup = 1, Text = "get money 100k", Money = 100000 });
+			CommunityChest.Add(new ChestCard { RandomGroup = 1, Text = "get money 1.5M", Money = 1500000 });
+			CommunityChest.Add(new ChestCard { RandomGroup = 1, Text = "get money 2M", Money = 2000000 });
+
+			//You are assessed for street repairs – $40 per house, $115 per hotel
+			CommunityChest.Add(new ChestCard
+			{
+				RandomGroup = 15,
+				Text = string.Format("You are assessed for street repairs – $100K per house, $400K per hotel"),
+				Money = 0
+			});
+
+
+			CommunityChest.Add(new ChestCard { RandomGroup = 5, Text = "Get out of jail free" });
+			CommunityChest.Add(new ChestCard { RandomGroup = 2, Text = "go to trans", Pos = 5 });
+
+			//go to cell
+			ChanceChest.Add(new ChestCard { RandomGroup = 2, Text = "Advance to Go", Pos = 0 });
+			ChanceChest.Add(new ChestCard { RandomGroup = 2, Text = "go to Police", Pos = 10 });
+			ChanceChest.Add(new ChestCard { RandomGroup = 2, Text = "go to", Pos = 11 });
+			ChanceChest.Add(new ChestCard { RandomGroup = 2, Text = "go to", Pos = 24 });
+			ChanceChest.Add(new ChestCard { RandomGroup = 2, Text = "go to ", Pos = 39 });
+
+			ChanceChest.Add(new ChestCard { RandomGroup = 3, Text = "go to 3 cell back", Pos = 3 });
+
+			ChanceChest.Add(new ChestCard { RandomGroup = 4, Text = "Pay each player $500K", Money = 500000 });
+
+		}
+		#endregion
 
         #region Cells props
 

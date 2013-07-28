@@ -27,7 +27,7 @@ namespace Monop.www.Controllers
             if (!Request.IsAuthenticated)
             {
                 var userName = "user" + DateTime.Now.ToString("mmss");
-                //FormsAuthentication.SetAuthCookie(userName, true);
+                FormsAuthentication.SetAuthCookie(userName, true);
             }
 
             return View();
@@ -119,7 +119,7 @@ namespace Monop.www.Controllers
                                 Status = GetStatus(uname),
                                 Money = 15000000
                             });
-                            if (count == g.conf.cnfMaxPlayers)
+							if (g.Players.Count == g.conf.cnfMaxPlayers)
                             {
                                 g.StartGame();
 
@@ -208,7 +208,7 @@ namespace Monop.www.Controllers
 
             if (Request.IsAuthenticated)
             {
-                var g = GameLogic.GameHelper.RestoreGameFromXML(fileState);
+                var g = GameHelper.RestoreGameFromXML(fileState);
                 //g.DebugMode = true;
 
                 g.SetLeaveGameAction((s, w) => { SiteGameHelper.SaveToDB(s, g, w); });
@@ -240,7 +240,7 @@ namespace Monop.www.Controllers
                 {
                     if (g.pcount > 0)
                     {
-                        if (g.Players[0].Name == uname || IsAdmin)
+						if (g.IsGameCreator(uname) || ConfigHelper.IsAdmin(uname))
                         {
                             gg.Remove(g);
                         }

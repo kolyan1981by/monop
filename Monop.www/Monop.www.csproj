@@ -71,6 +71,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\LearnController.cs" />
+    <Compile Include="Controllers\SimBaseController.cs" />
+    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="GameHelpers\SimHelper.cs" />
     <Compile Include="Helpers\Const.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -80,7 +82,7 @@
     <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SimController.cs" />
-    <Compile Include="GameHelpers\GameAction.cs" />
+    <Compile Include="GameHelpers\GameHandlers.cs" />
     <Compile Include="GameHelpers\SiteGameHelper.cs" />
     <Compile Include="GameHelpers\GameRender.cs" />
     <Compile Include="Global.asax.cs">
@@ -102,6 +104,7 @@
     <Compile Include="GameHelpers\MapHelper.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\RoundRec.cs" />
+    <Compile Include="Models\TestVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Helpers\SetCultureAttribute.cs" />
   </ItemGroup>
@@ -111,23 +114,15 @@
     <Content Include="Content\bg-nav-corner-sprite.png" />
     <Content Include="Content\bigLoader.gif" />
     <Content Include="Content\Game.css" />
+    <Content Include="Content\Images\Game\r1.png" />
+    <Content Include="Content\Images\Game\r2.png" />
+    <Content Include="Content\Images\Game\r3.png" />
+    <Content Include="Content\Images\Game\r4.png" />
+    <Content Include="Content\Images\Game\r5.png" />
+    <Content Include="Content\Images\Game\r6.png" />
+    <Content Include="Content\jquery-ui.min.css" />
     <Content Include="Content\jquery.jqplot.min.css" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Images\1.gif" />
-    <Content Include="Content\Images\1h.gif" />
-    <Content Include="Content\Images\2.gif" />
-    <Content Include="Content\Images\2h.gif" />
-    <Content Include="Content\Images\3.gif" />
-    <Content Include="Content\Images\3h.gif" />
-    <Content Include="Content\Images\4.gif" />
-    <Content Include="Content\Images\4h.gif" />
-    <Content Include="Content\Images\5.gif" />
-    <Content Include="Content\Images\5h.gif" />
-    <Content Include="Content\Images\6.gif" />
-    <Content Include="Content\Images\6h.gif" />
-    <Content Include="Content\Images\7h.gif" />
-    <Content Include="Content\Images\8h.gif" />
-    <Content Include="Content\Images\9h.gif" />
     <Content Include="Content\Images\chest2.png" />
     <Content Include="Content\Images\chest33.png" />
     <Content Include="Content\Images\Game\AucEn.png" />
@@ -180,7 +175,6 @@
     <Content Include="Views\Admin\Log.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\Users.cshtml" />
-    <Content Include="Views\Shared\Game\_Auction.cshtml" />
     <Content Include="Views\Learn\Index.cshtml" />
     <Content Include="Views\Learn\_ListRules.cshtml" />
     <Content Include="Views\Learn\TestRules.cshtml" />
@@ -197,7 +191,6 @@
     <Content Include="Scripts\Site.js" />
     <Content Include="Views\Home\MapView.cshtml" />
     <Content Include="Views\Shared\Game\PlayersState.cshtml" />
-    <Content Include="Views\Shared\Game\_Command.cshtml" />
     <Content Include="Views\Shared\_GameMap.cshtml" />
     <Content Include="Views\Shared\Controls\SmilesPopup.cshtml" />
     <Content Include="Views\Shared\Controls\ucTranslate.cshtml" />
@@ -240,6 +233,9 @@
     <None Include="res\Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+    <Content Include="Views\Test\Index.cshtml" />
+    <Content Include="Views\Test\List.cshtml" />
+    <Content Include="Views\Shared\Game\_GameCommands.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -283,8 +279,7 @@
           </IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
-          <CustomServerUrl>
-          </CustomServerUrl>
+          <CustomServerUrl>http://localhost</CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>

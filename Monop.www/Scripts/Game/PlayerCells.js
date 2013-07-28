@@ -1,6 +1,6 @@
 function Mortgage() {
 
-    $.post("/Game/Mortgage",
+    $.post("/Ajax/Mortgage",
         { str: state() },
         function(data) {
             //$("#map").html(data.Map);
@@ -12,7 +12,7 @@ function Mortgage() {
 
 function Build(act) {
 
-    $.post("/Game/Build",
+    $.post("/Ajax/Build",
         { str: state(), action: act },
         function(data) {
             //$("#map").html(data.Map);
@@ -24,7 +24,7 @@ function Build(act) {
 
 function Sell() {
 
-    $.post("/Game/SellHouses",
+    $.post("/Ajax/SellHouses",
         { str: state() },
         function(data) {
             //$("#map").html(data.Map);
@@ -61,7 +61,7 @@ function state() {
 
 function Trade() {
 
-    $.post("/Game/Trade",
+    $.post("/Ajax/Trade",
         { str: stateForTrade() },
         function(data) {
             //$("#map").html(data.Mapinfo.Map);

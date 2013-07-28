@@ -67,11 +67,11 @@ namespace Monop.www.Controllers
             return "successfull";
         }
 
-        public List<GameLogic.AucRule> GetRules
+        public List<AucRule> GetRules
         {
             get
             {
-                var list = Session["auc_list"] as List<GameLogic.AucRule>;
+                var list = Session["auc_list"] as List<AucRule>;
                 if (list == null)
                     Session["auc_list"] = list = ManualLogicHelper.LoadAucRules(SimHelper.ReadFromFile().ToArray()).ToList();
                 return list;

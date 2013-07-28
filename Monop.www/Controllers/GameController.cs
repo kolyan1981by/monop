@@ -15,8 +15,6 @@ namespace Monop.www.Controllers
         // GET: /Game/
         Game g;
 
-
-
         public ActionResult Index()
         {
             g = GetGame();
@@ -98,7 +96,7 @@ namespace Monop.www.Controllers
             if (g != null)
             {
                 //GameManager.CheckState(g);
-                PlayerStep.MakeStep(g, 3);
+                PlayerStep.MakeStep(g);
             }
 
             return RenderGame(g); ;

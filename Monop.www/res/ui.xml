@@ -2,14 +2,8 @@
   <text key="BuyOrAuc">
     <en>
       <![CDATA[
-      <img onclick="action();" 
-      onmouseout="this.src='/Content/images/Game/BuyEn.png';" 
-      onmouseover="this.src='/Content/images/Game/BuyEn_h.png';"  
-      src="/Content/images/Game/BuyEn.png" id="ibBuy">
-        <img onclick="action('auc');" 
-        src="/Content/images/Game/AucEn.png" id="ibAuc" 
-        onmouseout="this.src='/Content/images/Game/AucEn.png';" 
-        onmouseover="this.src='/Content/images/Game/AucEn_h.png';">
+      <input id="ibBuy" type="button" value="Buy" onclick="action();" />
+      <input id="ibAuc" type="button" value="Auction" onclick="action('auc');" />
     ]]>
     </en>
     <ru></ru>
@@ -25,10 +19,7 @@
   <text key="ButtonPay">
     <en>
       <![CDATA[
-          <img id="ibPay" onclick="action();" 
-          src="/Content/images/Game/PayEn.png"  
-          onmouseout="this.src='/Content/images/Game/PayEn.png';" 
-          onmouseover="this.src='/Content/images/Game/PayEn_h.png';" >
+      <input id="ibPay" type="button" value="Pay" onclick="action();" />
     ]]>
     </en>
     <ru></ru>
@@ -67,6 +58,25 @@
     <en>
       <![CDATA[
         <input id="Button3" type="button" value="Roll" onclick="roll(0);" />
+    ]]>
+    </en>
+    <ru></ru>
+  </text>
+  <text key="PartManualRoll">
+    <en>
+      <![CDATA[
+        <table style="width: 100%;">
+          <tr>
+              <td>
+                  <input type="image" src="/Content/images/Game/r1.png"  id="go1" name="go1" onclick="roll(1);">
+                  <input type="image" src="/Content/images/Game/r2.png"  id="go2" name="go2" onclick="roll(2);">
+                  <input type="image" src="/Content/images/Game/r3.png"  id="go3" name="go3" onclick="roll(3);">
+                  <input type="image" src="/Content/images/Game/r4.png"  id="go4" name="go4" onclick="roll(4);">
+                  <input type="image" src="/Content/images/Game/r5.png"  id="go5" name="go5" onclick="roll(5);">
+                  <input type="image" src="/Content/images/Game/r6.png"  id="go6" name="go6" onclick="roll(6);">
+              </td>
+          </tr>
+          </table>
     ]]>
     </en>
     <ru></ru>

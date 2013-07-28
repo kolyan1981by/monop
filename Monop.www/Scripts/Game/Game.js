@@ -60,7 +60,7 @@ function chSpeedUpdate() {
 
 
 }
-var updater = setInterval('loadPageData()', 2000);
+
 
 
 function sendMessage() {

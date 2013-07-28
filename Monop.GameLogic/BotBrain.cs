@@ -98,7 +98,8 @@ namespace GameLogic
         {
 
             double isNeedBuy = 0;
-           
+			if (GameHelper.GetPlayerAssets(g, p.Id) < cell.Cost) return 0;
+
             var groupsWithHouses = BotBrainHouses.GetGroupsWhereNeedBuildHouses(g, p);
             var needBuild = groupsWithHouses.Any();
 
@@ -208,46 +209,11 @@ namespace GameLogic
 
         #endregion
 
-        public static bool Mortgage(Game g, Player p, int PayAmount, bool InclMon = false)
-        {
-            if (p.Money >= PayAmount) return true;
-
-            var cells = g.Map.CellsByUser(p.Id).Where(a => !a.IsMortgage);
-
-            //select non monopoly cells-type1
-            var lands = cells.Where(x => !x.IsMonopoly && x.Type == 1);
-
-            //select trans and power cells
-            var transPower = cells.Where(x => x.Type == 2 || x.Type == 3);
-
-            //select monopoly without houses
-            IEnumerable<CellInf> q  = lands.Union(transPower);
-
-            if (InclMon)
-            {
-                var landsMon000 = cells.Where(x => x.IsMonopoly).GroupBy(x => x.Group).
-                Where(x => x.All(a => a.HousesCount == 0)).SelectMany(x => x);
-                q = q.Union(landsMon000);
-            }
-
-            string text = "";
-
-            foreach (var cell in q)
-            {
-                if (p.Money >= PayAmount) break;
-
-                p.Money += cell.MortgageAmount;
-                cell.IsMortgage = true;
-                text = text + "_" + cell.Id;
-            }
-
-            if (!string.IsNullOrEmpty(text))
-            {
-                g.FixAction("mortgage" + text);
-            }
-
-            return (p.Money >= PayAmount);
-        }
+      
+		public static bool MortgageSell(Game g, int PayAmount)
+		{
+			return MortgageSell(g, g.Curr, PayAmount);
+		}
 
         public static bool MortgageSell(Game g, Player p, int PayAmount)
         {
@@ -268,7 +234,46 @@ namespace GameLogic
 
         }
 
-       
+		public static bool Mortgage(Game g, Player p, int PayAmount, bool InclMon = false)
+		{
+			if (p.Money >= PayAmount) return true;
+
+			var cells = g.Map.CellsByUser(p.Id).Where(a => !a.IsMortgage);
+
+			//select non monopoly cells-type1
+			var lands = cells.Where(x => !x.IsMonopoly && x.Type == 1);
+
+			//select trans and power cells
+			var transPower = cells.Where(x => x.Type == 2 || x.Type == 3);
+
+			//select monopoly without houses
+			IEnumerable<CellInf> q = lands.Union(transPower);
+
+			if (InclMon)
+			{
+				var landsMon000 = cells.Where(x => x.IsMonopoly).GroupBy(x => x.Group).
+				Where(x => x.All(a => a.HousesCount == 0)).SelectMany(x => x);
+				q = q.Union(landsMon000);
+			}
+
+			string text = "";
+
+			foreach (var cell in q)
+			{
+				if (p.Money >= PayAmount) break;
+
+				p.Money += cell.MortgageAmount;
+				cell.IsMortgage = true;
+				text = text + "_" + cell.Id;
+			}
+
+			if (!string.IsNullOrEmpty(text))
+			{
+				g.FixAction("mortgage" + text);
+			}
+
+			return (p.Money >= PayAmount);
+		}
         
 
         public static void UnMortgageLands(Game g, Player p)
