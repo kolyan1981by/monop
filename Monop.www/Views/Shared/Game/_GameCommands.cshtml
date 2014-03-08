@@ -1,0 +1,36 @@
+﻿<div class='comm_dialog' title='command window'>
+    @foreach (var com in GameLogic.GameCommands.List())
+    {
+        <span>@com</span>
+        <br />
+        
+    }
+    <br />
+    @Html.TextBox("comm", "", new { style = "width:300px" })
+    <br />
+    <input id="run_command" type="button" value="run" />
+</div>
+<input id="commands" type="button" value="commands" />
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.comm_dialog').hide();
+
+        $('#commands').click(function (ev) {
+            $('.comm_dialog').dialog({
+                autoOpen: false,
+                width: 350,
+            }).dialog('open');
+        });
+
+        $('#run_command').click(function (ev) {
+            $.post("/ajax/RunCommand", { comm: $('#comm').val() },
+               function (data) {
+               });
+        });
+
+        $('.comm_dialog span').click(function () {
+            $('#comm').val($(this).text());
+        });
+    });
+</script>

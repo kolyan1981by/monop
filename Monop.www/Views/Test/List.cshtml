@@ -1,0 +1,44 @@
+﻿@{
+    ViewBag.Title = "List";
+}
+@model List<GameLogic.Game>
+<h2>List</h2>
+
+@using (Html.BeginForm("list", "test", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{ 
+    <table style="width: 80%;">
+        <tr>
+            <td>list</td>
+            <td>@Html.DropDownList("games", new SelectList(Model, "id", "GameName"))</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+    <input type="submit" name="store" value="store" />
+    <br />
+    <input type="file" id="file1" name="file1" />
+    
+    <input type="submit" name="reload" value="reload" />
+}
+
+<table style="width: 80%;">
+    <tr>
+        <th>id</th>
+        <th>name</th>
+        <th>State</th>
+        <th></th>
+        <th></th>
+    </tr>
+    @foreach (var gg in Model)
+    {
+        <tr>
+            <td>@gg.Id</td>
+            <td>@gg.GameName</td>
+            <td>@gg.State</td>
+            <td><a href="/Test/Store/@gg.Id">store</a></td>
+        </tr>
+    }
+
+</table>

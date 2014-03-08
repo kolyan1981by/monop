@@ -1,0 +1,134 @@
+﻿@{
+    ViewBag.Title = "Test";
+}
+@model Monop.www.Models.TestVM
+@section Head
+{
+    <script src="@Url.Content("~/Scripts/Game/Game.js")" type="text/javascript"></script>
+
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('#show').click(function (ev) {
+            var max = parseInt($('#max_r').text());
+            Load(max - 1);
+        });
+        $('#step').click(function (ev) {
+            $.post("/test/nextstep", { roll: $('#roll').val() },
+            function (data) {
+                UpdatePage2(data);
+            });
+        });
+
+        $('.next').click(function (ev) {
+            var r = parseInt($('#rid').val());
+            var max = parseInt($('#max_r').text());
+            r++;
+            if (r > max) r = max;
+            $('#rid').val(r);
+            Load(r);
+        });
+
+        $('.prev').click(function (ev) {
+            var r = parseInt($('#rid').val());
+            r--;
+            if (r < 0) r = 0;
+            $('#rid').val(r);
+            Load(r);
+        });
+
+      
+       
+
+    });
+
+    function createDialog(title, text, options) {
+        return $("<div class='dialog' title='" + title + "'><p>" + text + "</p></div>")
+        .dialog(options);
+    }
+
+    function Load(r) {
+        $.post("/test/Round", { r: r },
+            function (data) {
+                UpdatePage2(data);
+            });
+    }
+    function UpdatePage2(data) {
+
+        $.each(data.Map, function (i, item) {
+            $('#map_c' + item.id).html(item.text).css('backgroundColor', item.color);
+        });
+
+        $.each(data.Players, function (i, item) {
+            $('#map_c' + item.id).html(item.images);
+        });
+
+        $("#plstate").html(data.PlayersState);
+        $("#pl_info").html(data.PlayersInfo);
+        $("#eventlog").html(data.GameLog);
+        $("#curr_round").text(data.Round);
+        $("#max_r").text(data.MaxRound);
+    }
+
+
+    //var updater = setInterval('loadPageData()', 2000);
+</script>
+
+
+@Html.Partial("Game/_GameCommands")
+<h2>Test</h2>
+<div style="margin-bottom: 15px;">
+    @using (Html.BeginForm())
+    { 
+        @Html.CheckBoxFor(m => m.isDebug) <span>debug</span>
+        <table style="width: 80%;">
+            @for (int i = 0; i < Model.Players.Count(); i++)
+            {
+                <tr>
+                    <td>player_ @i<br />
+                        cells
+                    @Html.TextBox("p0c")
+                        money @Html.TextBoxFor(m => m.Players[i].p0m, new { style = "width:50px" })
+                        pos @Html.TextBoxFor(m => m.Players[i].p0p, new { style = "width:50px" })
+                        @Html.CheckBoxFor(m => m.Players[i].p0h) <span>is_hum</span>
+                    </td>
+                </tr>
+            }
+
+        </table>
+        <input type="submit" name="init" value="Init" />
+    }
+    <table style="width: 100%;">
+        <tr>
+            <td valign="top">
+
+                <div>
+                    <input class="prev" type="button" value="prev" />
+                    <input id="rid" type="text" value="0" style="width: 50px" />
+                    <input class="next" type="button" value="next" />
+
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <div id="pl_info"></div>
+                    <div id="eventlog"></div>
+                </div>
+            </td>
+            <td valign="top">
+                <div>
+                    @Html.TextBox("roll", 3, new { style = "width:50px" })
+                    r=<span id="curr_round"></span>
+                    max=<span id="max_r"></span>
+                    <input id="show" type="button" value="show" />
+
+                    <input id="step" type="button" value="step" />
+
+                </div>
+                <div id="plstate"></div>
+            </td>
+        </tr>
+
+    </table>
+
+    @Html.Partial("_GameMap")
+</div>
