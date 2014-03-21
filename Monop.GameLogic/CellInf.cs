@@ -5,6 +5,7 @@ using System.Text;
 
 namespace GameLogic
 {
+//test
     public class CellInf : ICloneable
     {
         public int Id { get; set; }
